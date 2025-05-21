@@ -1,0 +1,265 @@
+/* assets/css/style.css */
+
+/* 柔和主题颜色板 */
+:root {
+    --primary-color: #667eea; /* 柔和的蓝紫色 */
+    --secondary-color: #764ba2; /* 柔和的深紫色 */
+    --background-color: #f0f4f8; /* 浅灰色/蓝灰色背景 */
+    --card-background: #ffffff; /* 白色卡片背景 */
+    --text-color: #333333; /* 深灰色文本 */
+    --light-text-color: #5a677c; /* 稍浅的文本 */
+    --border-color: #e2e8f0; /* 柔和的边框颜色 */
+    --link-color: var(--primary-color); /* 链接颜色使用主色 */
+    --link-hover-color: #ff6b6b; /* 链接和一些标题悬停时使用的醒目颜色，例如柔和的粉红色或橙色 */
+    --footer-background: #cbd5e0; /* 柔和的页脚背景 */
+    --button-background: var(--primary-color); /* 按钮背景 */
+    --button-text-color: white; /* 按钮文本颜色 */
+}
+
+/* 基本样式重置和字体 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    overflow-x: hidden; /* 防止一些动画引起横向滚动条 */
+}
+
+/* 容器类 - 控制内容宽度和居中 */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 头部样式 */
+header {
+    /* 渐变背景，为了动画可以增加颜色节点，并设置背景尺寸大于100% */
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+    background-size: 200% 100%; /* 允许背景平移 */
+    background-position: 0% 50%; /* 初始位置 */
+
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    /* JS控制动画，所以这里不需要CSS transition或animation */
+}
+
+header h1 {
+    margin: 0 0 10px 0;
+    font-size: 3em;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+header .subtitle {
+    margin: 0;
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+
+header i.fas { /* 头部图标样式 */
+    margin-right: 10px;
+}
+
+
+/* 导航样式 */
+nav {
+    background-color: var(--card-background);
+    padding: 15px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+    position: sticky; /* 导航栏固定在顶部 (如果需要) */
+    top: 0;
+    z-index: 1000;
+    /* JS控制整体入场动画，这里可以不加opacity: 0; */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 18px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: bold;
+    padding: 8px 12px;
+    /* JS控制悬停Y轴位移动画，这里可以不加CSS transition */
+    position: relative;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+    /* transform: translateY(-2px); // JS控制，移除CSS transform */
+}
+
+/* 导航下划线动画 (CSS 控制) */
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+nav a:hover::after {
+    transform: scaleX(1);
+}
+
+
+/* 主要内容区域 */
+main section {
+    background-color: var(--card-background);
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid var(--secondary-color);
+    /* JS控制入场动画，这里可以不加opacity: 0; */
+}
+
+main h2 {
+    /* JS控制颜色悬停动画，设置初始颜色 */
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    /* JS控制悬停X轴位移，这里可以不加CSS transition */
+}
+
+main h2 i.fas { /* Section标题图标样式 */
+    margin-right: 10px;
+}
+
+main p {
+    margin-bottom: 15px;
+    color: var(--light-text-color);
+}
+
+
+/* 链接样式 */
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+/* 列表样式 */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    margin-bottom: 12px;
+    padding-left: 25px;
+    position: relative;
+     /* JS控制入场动画，这里可以不加opacity: 0; */
+}
+
+/* 自定义列表标记 (小圆点或图标) */
+ul li::before {
+    content: '\2022'; /* Unicode 小圆点 */
+    color: var(--primary-color);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.guide-list li::before {
+    content: '\f0a9'; /* Font Awesome 右箭头图标 */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: var(--primary-color);
+}
+
+
+/* 行动按钮样式 */
+.cta-button-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--button-background);
+    color: var(--button-text-color);
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: none;
+    /* JS控制入场和脉冲动画，这里可以不加CSS transition或animation */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 初始阴影 */
+}
+
+.cta-button:hover {
+    background-color: var(--secondary-color);
+    /* transform: translateY(-3px); // JS控制，移除CSS transform */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+}
+
+
+/* 页脚样式 */
+footer {
+    background-color: var(--footer-background);
+    color: var(--light-text-color);
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 50px;
+    font-size: 0.95em;
+}
+
+/* 响应式优化 (保持之前的即可) */
+@media (max-width: 768px) {
+    header h1 { font-size: 2.5em; }
+    header { padding: 30px 0; }
+    nav ul li { margin: 0 10px; }
+    main .container { padding: 0 15px; }
+    main section { padding: 20px; margin-bottom: 20px; }
+    main h2 { font-size: 1.5em; margin-bottom: 15px; }
+    .cta-button { padding: 10px 20px; font-size: 1em; }
+}
+
+@media (max-width: 480px) {
+     header h1 { font-size: 2em; }
+     nav ul li { display: block; margin: 8px 0; }
+     nav ul { padding: 0 10px; }
+}
+
+/* 如果你仍然使用了 AOS 库，保留 AOS 的 CSS 链接 */
+/* <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> */
+/* 并且在 HTML 中保留 AOS 初始化 JS */
+/* <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> */
+/* <script> AOS.init(); </script> */
+/* 注意：如果完全由 GSAP 控制动画，可以移除 AOS */

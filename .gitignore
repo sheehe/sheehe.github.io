@@ -1,0 +1,9 @@
+# 忽略 npm 依赖
+node_modules/
+
+# 忽略 Parcel 构建输出
+dist/
+
+# 忽略 Parcel 和 npm 缓存
+.cache/
+.parcel-cache/

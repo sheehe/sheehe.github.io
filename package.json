@@ -1,0 +1,29 @@
+{
+  "name": "sheehe.github.io",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "parcel src/index.html src/guides/*.html --open",
+    "build": "parcel build src/index.html src/guides/*.html --public-url ./",
+    "deploy": "npm run build && gh-pages -d dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sheehe/sheehe.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sheehe/sheehe.github.io/issues"
+  },
+  "homepage": "https://github.com/sheehe/sheehe.github.io#readme",
+  "description": "",
+  "devDependencies": {
+    "gh-pages": "^6.3.0",
+    "parcel": "^2.15.1"
+  },
+  "dependencies": {
+    "gsap": "^3.13.0"
+  }
+}

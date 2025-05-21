@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>口袋斗罗大陆 - 成神活动任务明细 (排除登录/购买)</title>
+    <style>
+           .highlight-red { color: #d04040; } /* Red */
+           .highlight-blue { color: #4060d0; } /* Blue */
+           .highlight-green { color: #40d060; } /* Green */
+           .highlight-purple { color: #8a40d0; } /* Purple */
+           .highlight-cyan { color: #40d0d0; } /* Cyan */
+           .highlight-yellow { color: #d0d040; } /* Yellow */
+           .highlight-pink { color: #d04080; } /* Pink */
+
+           /* Let's use some of these for key numbers */
+           .highlight-total { color: #d04040; font-weight: bold; } /* Red for overall totals */
+           .highlight-fixed { color: #4060d0; font-weight: bold; } /* Blue for fixed amounts */
+           .highlight-task-points { color: #40d060; font-weight: bold; } /* Green for general task points */
+           .highlight-specific-task { color: #8a40d0; font-weight: bold; } /* Purple for specific key task points (like resource tasks) */
+           .highlight-required { color: #d0d040; font-weight: bold; } /* Yellow/Gold for required mission points */
+           .highlight-skippable { color: #d04080; font-weight: bold; } /* Pink for points that can be skipped */
+           .highlight-example-points { color: #40d0d0; font-weight: bold; } /* Cyan for points achieved in examples */
+
+
+        /* --- General Body and Layout Styling --- */
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; /* Preferred modern font stack */
+            line-height: 1.6;
+            margin: 0; /* Remove default margin */
+            padding: 20px;
+            background: linear-gradient(to bottom, #f7f5fa 0%, #f2f0f8 100%); /* Soft gradient background */
+            color: #333; /* Keep default text color */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh; /* Ensure body takes at least viewport height */
+            box-sizing: border-box; /* Include padding in element's total width and height */
+            overflow-y: auto; /* Allow vertical scrolling */
+            overflow-x: hidden; /* Prevent horizontal overflow from body */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px; /* Maximum width for the content area */
+            margin: 0 auto; /* Center the container */
+            padding: 30px; /* More padding */
+            background-color: #ffffff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Softer shadow */
+            border-radius: 15px; /* More rounded corners */
+            overflow: hidden; /* Ensures border-radius works and hides potential overflow from initial animation state */
+            border: 1px solid #c4bccc; /* Base border color */
+            position: relative; /* For containing child absolute elements if needed, and for z-index */
+            z-index: 1; /* Ensure container is above background */
+
+             /* Animation for container entrance */
+            animation-name: slideInUp;
+            animation-duration: 0.8s;
+            animation-fill-mode: both;
+            animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother ease-out */
+            opacity: 0; /* Start hidden for animation */
+        }
+
+        /* --- Keyframe Animations --- */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* --- Headings Styling --- */
+        h1, h2 {
+            color: #7d718c; /* Medium Greyish Purple */
+            border-bottom: 2px solid #c4bccc; /* Base border color */
+            padding-bottom: 12px;
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+        h1 { font-size: 2.5em; text-align: center; color: #5a5266; margin-bottom: 20px;} /* Primary text color */
+        h2 { font-size: 1.9em; color: #7d718c; } /* Medium Greyish Purple */
+
+        p { margin-bottom: 18px; line-height: 1.7; } /* Default paragraph spacing and line height */
+
+        /* --- Notes Section Styling --- */
+        .notes {
+            margin-bottom: 40px;
+            padding: 25px; /* More padding */
+            border: 1px solid #f0e68c; /* Khaki border */
+            background-color: #fffacd; /* Lemon Chiffon background */
+            border-radius: 10px; /* More rounded */
+            color: #6a5a3a; /* Dark Khaki text */
+            box-shadow: 0 3px 10px rgba(240, 230, 140, 0.3); /* Yellow shadow */
+
+             /* Animation */
+            animation-name: fadeIn;
+            animation-duration: 0.8s;
+            animation-delay: 0.7s; /* Staggered delay */
+            animation-fill-mode: both;
+            opacity: 0;
+        }
+        .notes p { margin: 10px 0; }
+        .notes ul { padding-left: 30px; margin: 15px 0;}
+        .notes li { margin-bottom: 8px; }
+         .notes strong { color: #8b8000; } /* Darker yellow for strong */
+
+        /* --- Table Explanation Section Styling --- */
+        .table-explanation {
+            margin-bottom: 40px;
+            padding: 25px;
+            border: 1px solid #a0c0d0; /* Cool Grey Blue border */
+            background-color: #e0f0ff; /* Light Blue background */
+            border-radius: 10px;
+            color: #406070; /* Dark Grey Blue text */
+            box-shadow: 0 3px 10px rgba(160, 192, 208, 0.3); /* Blue shadow */
+
+             /* Animation */
+            animation-name: fadeIn;
+            animation-duration: 0.8s;
+            animation-delay: 0.9s; /* Staggered delay */
+            animation-fill-mode: both;
+            opacity: 0;
+        }
+         .table-explanation h2 { color: #406070; border-bottom-color: #b0d0e0; } /* Darker blue heading, slightly darker border */
+         .table-explanation p { margin-bottom: 15px; }
+         .table-explanation ul { padding-left: 30px; margin: 15px 0;}
+         .table-explanation li { margin-bottom: 10px; line-height: 1.6;}
+         .table-explanation strong { color: #305060; } /* Even darker blue for strong */
+
+
+        /* --- Table Styling --- */
+        table {
+            width: 100%;
+            border-collapse: separate; /* Use separate for rounded corners on cells */
+            border-spacing: 0; /* Remove space between borders */
+            margin-bottom: 35px;
+            border-radius: 10px; /* Rounded corners for the table */
+            overflow: hidden; /* Ensures border-radius works with collapsed borders */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Subtle table shadow */
+
+             /* Animation */
+            /* Animation for table is handled by the container div below */
+        }
+
+        caption {
+            caption-side: top;
+            text-align: left;
+            font-weight: bold;
+            margin-bottom: 18px;
+            font-size: 1.5em;
+            color: #7d718c; /* Medium Greyish Purple */
+            padding: 0;
+        }
+
+        th, td {
+            border: none; /* Remove default border */
+            border-bottom: 1px solid #c4bccc; /* Base border color */
+            padding: 14px 10px; /* Adjusted padding */
+            text-align: left;
+            vertical-align: middle; /* Vertically center content */
+        }
+
+        th {
+            background-color: #f7f5fa; /* Light background */
+            font-weight: bold;
+            text-align: center;
+            color: #5a5266; /* Primary text color */
+            white-space: nowrap;
+            position: relative;
+            transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out; /* Smooth transition for hover */
+        }
+
+        th:hover {
+             transform: translateY(-2px) scale(1.01); /* Lift and slightly enlarge on hover */
+             background-color: #f2f0f8; /* Slightly darker background on hover */
+             z-index: 2; /* Bring to front on hover */
+             box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow on hover */
+        }
+
+        /* Apply rounded corners to the first and last header/total cells */
+         thead tr:first-child th:first-child { border-top-left-radius: 10px; }
+         thead tr:first-child th:last-child { border-top-right-radius: 10px; }
+         .total-row td:first-child { border-bottom-left-radius: 10px; }
+         .total-row td:last-child { border-bottom-right-radius: 10px; }
+
+
+        /* Table Body Rows */
+        tbody tr:nth-child(even) {
+            background-color: #fcfbfe; /* Very light background */
+        }
+         tbody tr:hover:not(.total-row):not(.daily-total-row) { /* Exclude total rows from hover effect */
+            background-color: #f2effa; /* Very light hover */
+             transition: background-color 0.2s ease-in-out;
+        }
+
+        /* --- Detailed Table Specific Styles --- */
+        .detailed-table-container {
+            margin-bottom: 35px;
+            /* Horizontal scrolling handled by media queries */
+
+             /* Animation */
+            animation-name: fadeIn;
+            animation-duration: 0.8s;
+            animation-delay: 1.1s; /* Staggered delay */
+            animation-fill-mode: both;
+            opacity: 0;
+        }
+
+        /* Custom scrollbar styling (Webkit browsers like Chrome, Safari) */
+        .detailed-table-container::-webkit-scrollbar { width: 10px; height: 10px; }
+        .detailed-table-container::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 5px; }
+        .detailed-table-container::-webkit-scrollbar-thumb { background: #c4bccc; border-radius: 5px; transition: background 0.3s ease; } /* Muted purple scrollbar */
+        .detailed-table-container::-webkit-scrollbar-thumb:hover { background: #9e91ad; } /* Darker purple on hover */
+
+
+        .detailed-table th {
+             min-width: 40px;
+        }
+        .detailed-table td {
+             text-align: center;
+             white-space: nowrap; /* Keep requirement numbers on one line */
+             padding: 12px 8px; /* Slightly less padding for dense data */
+        }
+        .detailed-table td:first-child { text-align: center; width: 60px; min-width: 60px;}
+
+        /* Style for the task name column - applies to the second TD or the task-name-cell class */
+        .detailed-table td:nth-child(2),
+        .detailed-table .task-name-cell {
+            text-align: center; /* Centered */
+            padding-left: 0; /* Remove padding left */
+            padding-right: 0; /* Remove padding right */
+            min-width: 120px;
+            max-width: 250px;
+            white-space: normal; /* Allow task name wrap */
+        }
+        /* Specific padding for task names when centering */
+        .detailed-table .task-name-cell {
+             padding: 12px 8px; /* Maintain some padding */
+        }
+
+
+        .detailed-table td:last-child { font-weight: bold; color: #7d718c;} /* Medium Greyish Purple */
+
+
+        /* --- Brief Table Specific Styles --- */
+         /* Animation */
+        .brief-table {
+             animation-delay: 1.3s; /* Staggered delay */
+             animation-fill-mode: both;
+            opacity: 0;
+            animation-name: fadeIn;
+        }
+        .brief-table td:nth-child(3),
+        .brief-table td:nth-child(4),
+        .brief-table td:nth-child(5) {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em; /* Slightly larger numbers */
+        }
+        .brief-table td:first-child { text-align: center; width: 60px; min-width: 60px;}
+
+         /* Style for the task name column in brief table */
+        .brief-table td:nth-child(2),
+        .brief-table .task-name-cell {
+            text-align: center; /* Centered */
+             padding-left: 0; /* Remove padding left */
+            padding-right: 0; /* Remove padding right */
+            min-width: 120px;
+        }
+         /* Specific padding for task names when centering */
+        .brief-table .task-name-cell {
+             padding: 12px 8px; /* Maintain some padding */
+        }
+
+
+         .brief-table td:nth-child(3) { color: #9e91ad; } /* Light Greyish Purple */
+         .brief-table td:nth-child(4) { color: #7d718c; } /* Medium Greyish Purple */
+         .brief-table td:nth-child(5) { color: #5a5266; } /* Primary text color */
+
+
+        /* --- Total Row Styling --- */
+        .total-row td {
+             font-weight: bold;
+             background-color: #f7f5fa; /* Light background */
+             text-align: center !important;
+             font-size: 1.3em; /* Larger font */
+             padding: 18px 12px; /* More padding */
+             border-top: 2px solid #c4bccc; /* Thicker base border above total */
+             border-bottom: none; /* No bottom border for the last row */
+        }
+         /* Style for Daily Total rows in Detailed table */
+         .daily-total-row td {
+             font-weight: bold;
+             background-color: #f2f0f8; /* Slightly different background */
+             text-align: center !important;
+             font-size: 1.1em; /* Smaller than final total */
+             padding: 14px 10px; /* Less padding */
+             border-top: 1px dashed #c4bccc; /* Dashed border */
+             border-bottom: 1px solid #c4bccc; /* Normal border below */
+             color: #7d718c; /* Use header color */
+         }
+
+
+        /* Align the label in the total row */
+        .detailed-table .total-row td:first-child,
+         .detailed-table .daily-total-row td:first-child {
+            text-align: right !important;
+            padding-right: 15px;
+        }
+         .brief-table .total-row td:first-child,
+         .brief-table .daily-total-row td:first-child {
+            text-align: right !important;
+            padding-right: 15px;
+        }
+        .total-row strong { color: #5a5266; } /* Primary text color */
+         .daily-total-row strong { color: #7d718c; } /* Medium Greyish Purple */
+
+
+        /* --- Summary Section Styling --- */
+        .summary {
+            margin-top: 40px;
+            padding: 25px;
+            background-color: #e0f0e8; /* Honeydew background */
+            border-left: 6px solid #98fb98; /* PaleGreen border */
+            border-radius: 10px;
+            color: #4a6a4a; /* Dark Sea Green text */
+            box-shadow: 0 3px 10px rgba(152, 251, 152, 0.3); /* Green shadow */
+
+             /* Animation */
+            animation-name: fadeIn;
+            animation-duration: 0.8s;
+            animation-delay: 1.5s; /* Staggered delay */
+            animation-fill-mode: both;
+            opacity: 0;
+        }
+        .summary h2 { color: #4a6a4a; border-bottom-color: #a0d0a0; } /* Darker green heading, slightly darker border */
+        .summary ul { padding-left: 30px; margin: 15px 0 0;}
+        .summary li { margin-bottom: 10px; line-height: 1.6;}
+         .summary strong { color: #3a5a3a; } /* Even darker green for strong */
+
+        /* --- Examples Section Styling --- */
+         .examples {
+            margin-top: 40px;
+            padding: 25px;
+            background-color: #ffe0e8; /* Light Rose background */
+            border-left: 6px solid #f0b0c0; /* Pink border */
+            border-radius: 10px;
+            color: #6a4a50; /* Dark Reddish text */
+            box-shadow: 0 3px 10px rgba(240, 176, 192, 0.3); /* Pink shadow */
+
+             /* Animation */
+            animation-name: fadeIn;
+            animation-duration: 0.8s;
+            animation-delay: 1.7s; /* Staggered delay */
+            animation-fill-mode: both;
+            opacity: 0;
+         }
+         .examples h2 { color: #6a4a50; border-bottom-color: #e8c0c8; } /* Darker reddish heading, slightly darker border */
+         .examples p { margin-bottom: 15px; }
+         .examples ol { padding-left: 25px; margin: 15px 0;}
+         .examples li { margin-bottom: 12px; line-height: 1.6;}
+         .examples strong { color: #5a3a40; } /* Even darker reddish for strong */
+         .examples .note-small { font-size: 0.9em; color: #777; margin-top: -10px; margin-bottom: 15px; }
+
+        /* --- Highlight Colors for Important Data --- */
+        /* Using specific classes for meaning/type of number */
+         .highlight-total { color: #d04040; font-weight: bold; } /* Red for overall target/max */
+         .highlight-fixed { color: #4060d0; font-weight: bold; } /* Blue for fixed/guaranteed points (login/buy) */
+         .highlight-task-points { color: #40d060; font-weight: bold; } /* Green for general task point values (10 points/req) */
+         .highlight-specific-task { color: #8a40d0; font-weight: bold; } /* Purple for specific key task points (e.g., resource tasks) */
+         .highlight-required { color: #d0d040; font-weight: bold; } /* Yellow/Gold for required mission points */
+         .highlight-skippable { color: #d04080; font-weight: bold; } /* Pink for points that can be skipped */
+         .highlight-example-points { color: #40d0d0; font-weight: bold; } /* Cyan for points achieved in examples */
+
+
+        /* --- Responsive Adjustments (Media Queries) --- */
+
+        /* Styles for screens wider than 1024px (Desktop) */
+        @media (min-width: 1024px) {
+            .detailed-table-container {
+                overflow-x: visible; /* Disable horizontal scroll */
+            }
+            .detailed-table {
+                table-layout: fixed; /* Fixed layout for better column control */
+                width: 100%;
+            }
+
+            /* Define explicit column widths for desktop */
+            .detailed-table thead th:first-child,
+            .detailed-table tbody td:first-child { width: 70px; } /* Day */
+
+            /* Task name column width */
+             .detailed-table thead th:nth-child(2),
+             .detailed-table tbody td:nth-child(2),
+             .detailed-table .task-name-cell { width: 280px; white-space: normal; } /* Task Name, allow wrap */
+
+
+             /* Calculate width for 15 requirement columns + last column */
+             /* Total width of fixed columns: 70 (Day) + 280 (Task) + 90 (Progress) = 440px */
+             /* Remaining width = 100% - 440px */
+             /* Distribute remaining width among 16 columns (15 requirements + the last one) */
+             /* Let's give the last (Progress) column a fixed width and distribute the rest among the 15 requirements */
+             .detailed-table thead th:last-child,
+             .detailed-table tbody td:last-child { width: 90px; } /* Progress */
+
+             /* Distribute remaining width across the 15 requirement columns */
+             /* (100% - 70px - 280px - 90px) / 15 */
+             .detailed-table tbody td:nth-child(n+3):nth-child(-n+17) {
+                 width: calc((100% - 70px - 280px - 90px) / 15); /* Calculate width for each requirement column */
+                 min-width: 45px; /* Ensure minimum readability */
+                 white-space: nowrap; /* Keep requirement numbers together */
+                 overflow: hidden; /* Hide overflow if calculation is slightly off */
+                 text-overflow: ellipsis; /* Add ellipsis for overflow text */
+             }
+
+             /* Adjust header column spanning the requirements */
+             .detailed-table thead th:nth-child(3) { /* This is the '任务要求' header */
+                 /* Its width is the sum of the 15 columns it spans */
+                 width: calc(15 * ( (100% - 70px - 280px - 90px) / 15 ) );
+                 /* Or simpler: width: calc(100% - 70px - 280px - 90px); */
+             }
+
+             /* Ensure the colspanned header aligns correctly - often tricky with fixed layout and complex headers */
+             /* Simple text-align center should work within the calculated width */
+
+        }
+
+        /* Styles for screens smaller than 1024px (Tablet and Mobile) */
+        @media (max-width: 1023px) {
+            body { padding: 15px; }
+            .container { padding: 20px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); }
+            h1 { font-size: 2em; margin-bottom: 15px;}
+            h2 { font-size: 1.6em; margin-bottom: 20px;}
+            p { margin-bottom: 15px; }
+            th, td { padding: 10px 8px; }
+            .notes, .summary, .examples, .table-explanation { padding: 18px; margin-bottom: 30px;} /* Added table-explanation */
+
+            .detailed-table-container {
+                overflow-x: auto; /* Enable horizontal scroll */
+                padding-bottom: 15px; /* Space for scrollbar */
+            }
+             .detailed-table {
+                 width: auto; /* Allow table to be wider than container */
+                 table-layout: auto; /* Let browser determine layout */
+             }
+            .detailed-table th,
+            .detailed-table td {
+                 width: auto !important; /* Reset fixed widths */
+                 min-width: auto !important; /* Reset min-widths from desktop */
+            }
+            .detailed-table thead th:first-child, .detailed-table tbody td:first-child { min-width: 50px; } /* Day */
+            /* Adjust task name width for mobile */
+             .detailed-table thead th:nth-child(2),
+             .detailed-table tbody td:nth-child(2),
+             .detailed-table .task-name-cell { min-width: 100px; white-space: normal; padding: 10px 8px; } /* Adjusted padding for mobile center */
+
+             .detailed-table thead th:last-child, .detailed-table tbody td:last-child { min-width: 70px; } /* Progress */
+            .detailed-table tbody td:nth-child(n+3):nth-child(-n+17) { min-width: 40px; white-space: nowrap; } /* Requirement cells */
+
+             /* Reset rounded corners on edges that might not be table edges anymore due to scrolling */
+             thead tr:first-child th:first-child,
+             thead tr:first-child th:last-child,
+             .total-row td:first-child,
+             .total-row td:last-child {
+                 border-radius: 0;
+             }
+
+             /* Brief table task name width */
+             .brief-table td:nth-child(2),
+             .brief-table .task-name-cell { min-width: 100px; padding: 10px 8px; } /* Adjusted padding for mobile center */
+
+
+        }
+        /* Further reduce padding on smaller mobile screens */
+         @media (max-width: 480px) {
+             body { padding: 10px; }
+             .container { padding: 15px; }
+             h1 { font-size: 1.5em; }
+             h2 { font-size: 1.3em; }
+             th, td { padding: 8px 4px; }
+             .notes, .summary, .examples, .table-explanation { padding: 15px; margin-bottom: 20px;} /* Added table-explanation */
+             .detailed-table td:nth-child(2) { min-width: 80px; }
+             .detailed-table tbody td:nth-child(n+3):nth-child(-n+17) { min-width: 30px; } /* Reduce requirement column min-width if needed */
+         }
+
+
+        /* --- Link Styling (if any) --- */
+        a { color: #9e91ad; text-decoration: none; transition: color 0.2s ease; } /* Highlights color */
+        a:hover { text-decoration: underline; color: #7d718c; } /* Medium Greyish Purple */
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>口袋斗罗大陆 - 成神活动任务明细</h1>
+    <p style="text-align: center; color: #666; margin-top: -15px; margin-bottom: 30px;">参考资料 (不含七天登录<span class="highlight-fixed">70进度</span>及七天购买2500钻石<span class="highlight-fixed">70进度</span>)</p>
+
+    <div class="notes">
+        <p><strong>说明：</strong></p>
+        <ul>
+            <li>总目标 <span class="highlight-total">1500点</span>。</li>
+            <li>排除固定获取 <span class="highlight-fixed">140点</span> (登录/购买)，需任务完成 <span class="highlight-goal">1360点</span>。</li>
+            <li>每完成一项任务要求得 <span class="highlight-task-points">10点</span> 进度。</li>
+            <li>第五天转盘抽奖 <span class="highlight-specific-task">100点</span> 不计入。</li>
+            <li>其他日常类“必拿”任务共 <span class="highlight-task">870点</span>。</li>
+        </ul>
+    </div>
+
+    <div class="table-explanation">
+        <h2>表格阅读说明</h2>
+        <p>本表列出每日任务要求和进度。</p>
+        <ul>
+            <li><strong>行：</strong> 各任务类型及总计。</li>
+            <li><strong>列：</strong>
+                <ul>
+                    <li>天数 / 任务名称：哪个任务在哪天。</li>
+                    <li>任务名称(*N)：实际要求是表中显示的数值乘以 N。</li>
+                    <li>任务要求 1-15：各阶段需完成的数值。</li>
+                    <li>该任务最高进度：完成所有要求总共得多少点 (每要求<span class="highlight-task-points">10点</span>)。</li>
+                </ul>
+            </li>
+            <li><strong>阅读：</strong> 找任务看要求列数值。带(*N)的，数值需乘N。</li>
+        </ul>
+    </div>
+
+
+    <h2>成神活动任务明细 (详细版)</h2>
+<p>本表列出了每日各项任务的详细要求。总目标任务进度为<span class="highlight-goal">1360点</span>。每达成一项要求获得<span class="highlight-task-points">10点</span>进度。</p>
+
+<div class="detailed-table-container">
+    <table class="detailed-table">
+        <caption>详细任务要求表 (不含登录/购买进度)</caption>
+        <thead>
+            <tr>
+                <th rowspan="2">天数</th>
+                <th rowspan="2">任务名称</th>
+                <th colspan="15">任务要求</th>
+                <th rowspan="2">该任务最高进度<br>(10点/要求)</th>
+            </tr>
+            <tr>
+                <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+                <th>11</th><th>12</th><th>13</th><th>14</th><th>15</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 第一天 -->
+            <tr>
+                <td rowspan="5">第一天</td>
+                <td>御堂</td>
+                <td>2</td><td>4</td><td>6</td><td>8</td><td>10</td>
+                <td>12</td><td>14</td><td>16</td><td>18</td><td>20</td>
+                <td colspan="5"></td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">药材</td>
+                <td>2</td><td>4</td><td>6</td><td>8</td><td>10</td>
+                <td>12</td><td>14</td><td>16</td><td>18</td><td>20</td>
+                <td colspan="5"></td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">招募(*100)</td>
+                <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
+                <td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+                <td>12</td><td>14</td><td>16</td><td>18</td><td>20</td>
+                <td>150</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">追击(*100)</td>
+                <td>1</td><td>2</td><td>3</td><td>4</td><td>6</td>
+                <td>8</td><td>10</td><td>12</td><td>14</td><td>16</td>
+                <td colspan="5"></td>
+                <td>100</td>
+            </tr>
+             <tr class="daily-total-row">
+                 <td colspan="17"><strong>总计</strong></td>
+                 <td><strong>450</strong></td>
+            </tr>
+            <!-- 第二天 -->
+            <tr>
+                <td rowspan="5">第二天</td>
+                <td>联盟捐献</td>
+                <td>1</td><td>3</td><td>5</td>
+                <td colspan="12"></td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">斗魂场</td>
+                <td>1</td><td>3</td><td>5</td>
+                <td colspan="12"></td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">副本挑战</td>
+                <td>5</td><td>10</td><td>15</td><td>20</td><td>25</td><td>30</td><td>35</td><td>40</td>
+                <td colspan="7"></td>
+                <td>80</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">敏堂情报</td>
+                <td>5</td><td>10</td><td>15</td><td>20</td><td>25</td><td>30</td><td>40</td><td>50</td>
+                <td colspan="7"></td>
+                <td>80</td>
+            </tr>
+             <tr class="daily-total-row">
+                 <td colspan="17"><strong>总计</strong></td>
+                 <td><strong>220</strong></td>
+            </tr>
+            <!-- 第三天 -->
+            <tr>
+                <td rowspan="5">第三天</td>
+                <td>开启秘宝</td>
+                <td>25</td><td>50</td><td>75</td><td>100</td><td>125</td><td>150</td><td>175</td><td>200</td>
+                <td colspan="7"></td>
+                <td>80</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">好友赠送</td>
+                <td>1</td><td>10</td><td>20</td>
+                <td colspan="12"></td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">拟态挑战</td>
+                <td>1</td><td>5</td><td>10</td>
+                <td colspan="12"></td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">风暴航线</td>
+                <td>1</td><td>3</td><td>5</td>
+                <td colspan="12"></td>
+                <td>30</td>
+            </tr>
+             <tr class="daily-total-row">
+                 <td colspan="17"><strong>总计</strong></td>
+                 <td><strong>170</strong></td>
+            </tr>
+            <!-- 第四天 -->
+            <tr>
+                <td rowspan="5">第四天</td>
+                <td>魂环</td>
+                <td>2</td><td>4</td><td>6</td><td>8</td><td>12</td><td>16</td><td>20</td><td>24</td><td>28</td><td>32</td>
+                <td colspan="4"></td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">联盟捐献</td>
+                <td>1</td><td>3</td><td>5</td>
+                <td colspan="12"></td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">斗魂场挑战</td>
+                <td>1</td><td>3</td><td>5</td>
+                <td colspan="12"></td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">海神试炼</td>
+                <td>1</td><td>3</td><td>5</td>
+                <td colspan="12"></td>
+                <td>30</td>
+            </tr>
+             <tr class="daily-total-row">
+                 <td colspan="17"><strong>总计</strong></td>
+                 <td><strong>190</strong></td>
+            </tr>
+            <!-- 第五天 -->
+            <tr>
+                <td rowspan="5">第五天</td>
+                <td>转盘抽奖</td>
+                <td>50</td><td>100</td><td>150</td><td>200</td><td>250</td><td>300</td><td>350</td><td>400</td><td>450</td><td>500</td>
+                <td colspan="5"></td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">药园种植(*10)</td>
+                <td>1</td><td>3</td><td>5</td>
+                <td colspan="12"></td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">好友赠送</td>
+                <td>1</td><td>10</td><td>20</td>
+                <td colspan="12"></td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">拟态挑战</td>
+                <td>1</td><td>5</td><td>10</td>
+                <td colspan="12"></td>
+                <td>30</td>
+            </tr>
+             <tr class="daily-total-row">
+                 <td colspan="17"><strong>总计</strong></td>
+                 <td><strong>190</strong></td>
+            </tr>
+            <!-- 第六天 -->
+            <tr>
+                <td rowspan="5">第六天</td>
+                <td>暗器消耗(*1000)</td>
+                <td>2</td><td>4</td><td>6</td><td>8</td><td>10</td><td>12</td><td>14</td><td>16</td><td>18</td><td>20</td>
+                <td colspan="5"></td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">联盟捐献</td>
+                <td>1</td><td>3</td><td>5</td>
+                <td colspan="12"></td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">斗魂场挑战</td>
+                <td>1</td><td>3</td><td>5</td>
+                <td colspan="12"></td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">矿境掠夺</td>
+                <td>1</td><td>2</td><td>4</td><td>6</td>
+                <td colspan="11"></td>
+                <td>40</td>
+            </tr>
+             <tr class="daily-total-row">
+                 <td colspan="17"><strong>总计</strong></td>
+                 <td><strong>200</strong></td>
+            </tr>
+            <!-- 第七天 -->
+            <tr>
+                <td rowspan="5">第七天</td>
+                <td>追击</td>
+                <td>10</td><td>30</td><td>50</td><td>75</td><td>100</td>
+                <td colspan="10"></td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">招募(*10)</td>
+                <td>2</td><td>5</td><td>10</td><td>15</td><td>20</td>
+                <td colspan="10"></td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">魂环(*10)</td>
+                <td>5</td><td>10</td><td>15</td><td>20</td><td>30</td>
+                <td colspan="10"></td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td class="task-name-cell">暗器(*100)</td>
+                <td>5</td><td>10</td><td>15</td><td>20</td><td>25</td>
+                <td colspan="10"></td>
+                <td>50</td>
+            </tr>
+             <tr class="daily-total-row">
+                 <td colspan="17"><strong>总计</strong></td>
+                 <td><strong>200</strong></td>
+            </tr>
+            <!-- 总计行 -->
+            <tr class="total-row">
+                 <td colspan="17"><strong>全部任务最高总进度 (不含登录/购买)</strong></td>
+                 <td><strong class="highlight-total">1620</strong></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</div>
+</body>
+</html>
